@@ -62,7 +62,8 @@ def sigmoid(z):
     exp_ = np.exp(z)
     return (1/sum(exp_) * exp_).reshape((len(z),1))
 
-
+def negative_log_likelihood(y_hat,y_true):
+    return ((-1)*(np.log(y_hat[int(y_true)])))
 
 
 
