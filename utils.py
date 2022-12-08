@@ -36,6 +36,28 @@ def load_dataset(output=False):
     return train_loader,test_loader
 
 
+def dim_reduction(reduction,kernel,train_X,test_X,train_y=None,test_y=None):
+    match reduction:
+        case 'pca':
+            from sklearn.decomposition import KernelPCA
+            from sklearn.discriminant_analysis import LinearDiscriminantAnalysis as LDA
+            print('Starting PCA transform.')
+            #  {'linear', 'poly', 'rbf', 'sigmoid', 'cosine', 'precomputed'}
+            pca = KernelPCA(n_components=100,kernel=kernel)
+            train_X = pca.fit_transform(train_X)
+            test_X = pca.transform(test_X)
+            print('PCA transform complete')
+        case 'lda':
+            from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+            # solver : {'svd', 'lsqr', 'eigen'}, default='svd'
+            lda = LinearDiscriminantAnalysis(solver='svd',n_components=9)
+            train_X = lda.fit_transform(train_X,train_y)
+            test_X = lda.transform(test_X)
+        case _:
+            print('Invalid reduction received. No change in dataset')
+    return train_X,test_X
+
+
 
 
 
