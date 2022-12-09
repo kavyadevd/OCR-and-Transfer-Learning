@@ -3,7 +3,11 @@ from torchvision import datasets
 from torchvision import transforms
 import matplotlib.pyplot as plt
 import numpy as np
+from scipy.special import logsumexp
+import torch.nn as nn
 
+MNIST_GLOBAL_MEAN = 0.1307
+MNIST_SD = 0.3081
 
 def load_dataset(output=False):
     print('Generating train and test loaders:')
@@ -62,6 +66,7 @@ def softmax(z):
     try:
         exp_ = np.exp(z)
         return (1/sum(exp_) * exp_).reshape((len(z),1))
+        # return np.exp( z - (logsumexp(z,axis=1).reshape(len(z),1)))
     except Exception as ex:
         print(ex)
 
@@ -71,10 +76,11 @@ def negative_log_likelihood(y_hat,y_true):
     except Exception as ex:
         print(ex)
 
+## For CNN Flatten()
+class Flatten(nn.Module):
+    def forward(self, x):
+        return x.view(x.shape[0], -1)
 
 
-
-
-
-
+# https://gist.github.com/kevinzakka/d33bf8d6c7f06a9d8c76d97a7879f5cb#file-utils-py
 ## Reference: https://www.programcreek.com/python/?code=oval-group%2Fdfw%2Fdfw-master%2Fexperiments%2Fdata%2Floaders.py
