@@ -58,12 +58,18 @@ def dim_reduction(reduction,kernel,train_X,test_X,train_y=None,test_y=None):
             print('Invalid reduction received. No change in dataset')
     return train_X,test_X
 
-def sigmoid(z):
-    exp_ = np.exp(z)
-    return (1/sum(exp_) * exp_).reshape((len(z),1))
+def softmax(z):
+    try:
+        exp_ = np.exp(z)
+        return (1/sum(exp_) * exp_).reshape((len(z),1))
+    except Exception as ex:
+        print(ex)
 
 def negative_log_likelihood(y_hat,y_true):
-    return ((-1)*(np.log(y_hat[int(y_true)])))
+    try:
+        return ((-1)*(np.log(y_hat[int(y_true)])))
+    except Exception as ex:
+        print(ex)
 
 
 
