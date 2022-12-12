@@ -66,4 +66,4 @@ mkdir <project-root>/Code/TransferLearning/monkey_dataset
 
 Notebooks are already executed and conain the result. To rename them again, open in any compatible editor eg. VSCode and click runall pr Fn5 hotkey.
 
-Full code with results can be viewed at https://github.com/kavyadevd/MNIST-Handwriting-Recognition
+Full code with results can be viewed at https://github.com/kavyadevd/OCR-and-Transfer-Learning
